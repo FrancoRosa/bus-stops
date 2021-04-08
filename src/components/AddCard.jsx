@@ -7,7 +7,7 @@ const AddCard = ({ addToVideoSets }) => (
       <span class="icon has-text-link">
         <i class="fas fa-plus"></i>
       </span>
-      <span>Add new set</span>
+      <span>Añadir paradero</span>
     </span>
   </a>
 )

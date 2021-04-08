@@ -15,7 +15,7 @@ const getVideoSets = () => {
     videosets = [
       {
         id: Date.now(),
-        setTitle: 'New video set',
+        setTitle: 'Nuevo Paradero',
         videos: ['','',''],
         blur: 0,
         selected: true
@@ -39,7 +39,7 @@ const videosets = (state = getVideoSets(), action) => {
       newState = [
         ...videosets, {
           id: Date.now(),
-          setTitle: 'New video set',
+          setTitle: 'Nuevo Paradero',
           videos: ['','',''],
           blur: 0,
           selected: true

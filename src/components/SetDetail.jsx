@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { removeFromVideoSets, setTitleToVideoSet } from "../actions";
 import BlurSelector from "./BlurSelector";
-import VideoSelector from "./VideoSelector";
+import Location from "./Location";
 
 const SetDetail = ({ displays, videosets, setTitleToVideoSet, removeFromVideoSets }) => {
   let videoset = videosets.find(videoset => videoset.selected == true)
@@ -26,21 +26,27 @@ const SetDetail = ({ displays, videosets, setTitleToVideoSet, removeFromVideoSet
 
   return (
     <div>
-      {videoset && <div className="details">
-        <input type="text" value={header} className="title title-input" onChange={updateHeader}/>
-        <div className="columns">
-          <VideoSelector selectedVideo={vids[0]} setid={videosetId} box="0" display={displays[0]} />
-          <VideoSelector selectedVideo={vids[1]} setid={videosetId} box="1" display={displays[1]} />
-          <VideoSelector selectedVideo={vids[2]} setid={videosetId} box="2" display={displays[2]} />
+      {
+        videoset
+          &&
+        <div className="details">
+          <input type="text" value={header} className="title title-input" onChange={updateHeader}/>
+          <div className="columns edition">
+            <div className="column is-two-thirds">
+              <Location />
+            </div>
+            <div className="column is-one-third">
+              <BlurSelector />
+            </div>
+          </div>
+          <span 
+            className="icon has-text-danger delete-set"
+            onClick={() => removeFromVideoSets(videoset.id)}
+          >
+            <i className="fas fa-trash"/>
+          </span>
         </div>
-        <BlurSelector />
-        <span 
-          className="icon has-text-danger delete-set"
-          onClick={() => removeFromVideoSets(videoset.id)}
-        >
-          <i className="fas fa-trash"/>
-        </span>
-      </div>}
+      }
     </div>
   )
 }

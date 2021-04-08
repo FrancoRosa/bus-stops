@@ -1,5 +1,3 @@
-import ConfigManager from "./ConfigManager"
-import EndPointConfig from "./EndPointConfig";
 import SetBrowser from "./SetBrowser";
 import SetDetail from "./SetDetail";
 
@@ -8,10 +6,9 @@ const App = () => {
     <div className="columns">
       <div className="column is-one-quarter">
         <SetBrowser />
-        <EndPointConfig />
       </div>
       <div className="column">
-        <SetDetail setTitle="The Beautiful Mountains"/>
+        <SetDetail />
       </div>
     </div>
   );
