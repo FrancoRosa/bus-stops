@@ -6,6 +6,7 @@ const SetBrowser = ({ videosets }) => {
   return (
     <nav className="panel">
       <p className="panel-heading"> List of sets</p>
+      {videosets.map(videoset => <SetCard setInfo={videoset} />)}
       <AddCard />
     </nav>
   );

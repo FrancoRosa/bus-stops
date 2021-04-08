@@ -1,11 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import App from './components/App';
-import store from './reducers';
-
+import ReactDOM from 'react-dom';
 import './css/darkly.css';
 import './css/index.css';
+import App from './components/App';
+import store from './reducers';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -13,3 +12,4 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+

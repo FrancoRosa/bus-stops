@@ -1,14 +1,17 @@
-import StopBrowser from "./StopBrowser";
-import StopDetail from "./StopDetail";
+import ConfigManager from "./ConfigManager"
+import EndPointConfig from "./EndPointConfig";
+import SetBrowser from "./SetBrowser";
+import SetDetail from "./SetDetail";
 
 const App = () => {
   return (
     <div className="columns">
       <div className="column is-one-quarter">
-        <StopBrowser />
+        <SetBrowser />
+        <EndPointConfig />
       </div>
       <div className="column">
-        <StopDetail setTitle="The Beautiful Mountains"/>
+        <SetDetail setTitle="The Beautiful Mountains"/>
       </div>
     </div>
   );

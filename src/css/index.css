@@ -1,13 +1,126 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body::-webkit-scrollbar {
+  display: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.panel::-webkit-scrollbar {
+  display: none;
 }
+
+.column {
+  border: solid 1px rgb(43, 53, 24);
+  border-radius: 10px;
+}
+
+.panel {
+  padding: 1em;
+  margin: 1em;
+  height: 60vh;
+  overflow: scroll;
+}
+
+.panel-block {
+  display: flex;
+  justify-content: space-between;
+}
+
+.panel-block > .controls > *{
+  margin: 0 0.5em;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.1em;
+  margin: 0.1em;
+}
+
+.field > input {
+  width: 60%;
+}
+
+.endpoint {
+  padding: 1em;
+  margin: 1em;
+}
+
+.videoselector {
+  padding: 0;
+  margin: 0 0.2em;
+}
+
+.details {
+  padding: 1em 2em 0 0;
+  margin: 1em 2em 0 0;
+}
+
+.blurselector {
+  display: flex;
+  justify-content: center;
+}
+
+.blurselector > .field{
+  display: flex;
+  width: 40%;
+  justify-content: space-around;
+}
+
+.slider {
+  width: 100%;
+}
+
+.title-input {
+  border-style: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 3rem;
+  color: white;
+  max-width: 80%;
+}
+
+.delete-set{
+  position: absolute;
+  right: 1em;
+  padding: 2em;
+  cursor: pointer;
+}
+
+.card-footer{
+  flex-direction: column;
+}
+
+.file-selector{
+  width: 100%;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+ }
+ 
+ input[type="range"]:focus {
+  outline: none;
+ }
+
+ input[type="range"]::-webkit-slider-runnable-track {
+  height: 5px;
+  border: solid 1px #107964;
+  background: #0a5546;
+ }
+
+  input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 15px;
+  width: 15px;
+  background: #22dab5;
+  margin-top: -5px;
+  border-radius: 50%;
+ }
+ 
+ .file-name {
+   width: 100%;
+   display: block;
+ }
+
+ .file-label{
+  width: 100%;
+ }
