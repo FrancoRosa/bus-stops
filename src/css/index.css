@@ -10,11 +10,6 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-.column {
-  border: solid 1px rgb(43, 53, 24);
-  border-radius: 10px;
-}
-
 .panel {
   padding: 1em;
   margin: 1em;
@@ -142,4 +137,8 @@ input[type="range"] {
 
  .edition {
    height: 70vh;
+ }
+
+ .container {
+   
  }

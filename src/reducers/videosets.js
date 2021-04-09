@@ -4,7 +4,8 @@ import {
   SELECT_VIDEOSET,
   SET_TITLE_TO_VIDEOSET,
   SET_VIDEO_TO_VIDEOSET,
-  SET_BLUR_TO_VIDEOSET,
+  SET_LAT_TO_VIDEOSET,
+  SET_LNG_TO_VIDEOSET,
 } from '../actions/index';
 
 const getVideoSets = () => {
@@ -15,9 +16,11 @@ const getVideoSets = () => {
     videosets = [
       {
         id: Date.now(),
-        setTitle: 'Nuevo Paradero',
-        videos: ['','',''],
-        blur: 0,
+        title: 'Nuevo Paradero',
+        lat: 0,
+        lng: 0,
+        angle: 0,
+        file: '',
         selected: true
       },
     ];
@@ -39,9 +42,11 @@ const videosets = (state = getVideoSets(), action) => {
       newState = [
         ...videosets, {
           id: Date.now(),
-          setTitle: 'Nuevo Paradero',
-          videos: ['','',''],
-          blur: 0,
+          title: 'Nuevo Paradero',
+          lat: 0,
+          lng: 0,
+          angle: 0,
+          file: '',
           selected: true
         }
       ];
@@ -84,32 +89,32 @@ const videosets = (state = getVideoSets(), action) => {
       saveToLocalStorage(newState)
       return newState
 
-    case SET_VIDEO_TO_VIDEOSET:
-      const selectedVideoset = state.filter(videoset => videoset.selected == true)[0]
-      selectedVideoset.videos[action.index]=action.video
-      const videosetVideos = selectedVideoset.videos;
-
-      newState = [
-        ...state.map(videoset => ({
-          ...videoset, videos: videoset.selected == true ? videosetVideos : videoset.videos
-        }))
-      ]
-      saveToLocalStorage(newState)
-      return newState
-
-    case SET_BLUR_TO_VIDEOSET:
+    case SET_LAT_TO_VIDEOSET:
       const selVideoset = state.filter(videoset => videoset.selected == true)[0]
-      selVideoset.blur=action.blur
-      const videosetBlur = selVideoset.blur;
+      selVideoset.lat=action.lat
+      const videosetLat = selVideoset.lat;
 
       newState = [
         ...state.map(videoset => ({
-          ...videoset, blur: videoset.selected == true ? videosetBlur : videoset.blur
+          ...videoset, lat: videoset.selected == true ? videosetLat : videoset.lat
         }))
       ]
       saveToLocalStorage(newState)
       return newState
-      
+    
+    case SET_LNG_TO_VIDEOSET:
+      const selVideosetl = state.filter(videoset => videoset.selected == true)[0]
+      selVideosetl.lng=action.lng
+      const videosetLng = selVideosetl.lng;
+
+      newState = [
+        ...state.map(videoset => ({
+          ...videoset, lng: videoset.selected == true ? videosetLng : videoset.lng
+        }))
+      ]
+      saveToLocalStorage(newState)
+      return newState  
+
     default:
       return state;
   }

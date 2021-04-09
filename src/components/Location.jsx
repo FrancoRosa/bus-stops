@@ -1,32 +1,34 @@
 import { connect } from 'react-redux';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { setLatToVideoSet, setLngToVideoSet } from '../actions';
 
-const Location = ({ google, selectedPlace }) => {
-  const [ lat, setLat ] = useState(0)
-  const [ lng, setLng ] = useState(0)
+const Location = ({ google, selectedPlace, setLatToVideoSet, setLngToVideoSet, videoset }) => {
+  
+  const [ lat, setLat ] = useState(videoset.lat)
+  const [ lng, setLng ] = useState(videoset.lng)
 
   const onMapClick = (mapProps, map, clickEvent) =>{
     if (clickEvent.latLng){
-      setLat(clickEvent.latLng.lat().toFixed(5));
-      setLng(clickEvent.latLng.lng().toFixed(5));
+      let latitude = clickEvent.latLng.lat().toFixed(5)
+      let longitude = clickEvent.latLng.lng().toFixed(5)
+      setLat(latitude);
+      setLng(longitude);
+      setLatToVideoSet(latitude);
+      setLngToVideoSet(longitude);
+
       console.log('>>',lat,lng)
     }
   }
 
-  const style = {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-
-  }
+  useEffect(()=>{
+    setLat(videoset.lat);
+    setLng(videoset.lng);
+  },[videoset])
 
   return (
     <div className="container map-container">
-      <nav class="level">
-      </nav>
-      <h1 className="title is-7 has-text-success has-text-centered heading">Haz click en el mapa</h1>
-      <Map style={style} containerStyle={style} google={google} zoom={4} onClick={onMapClick} initialCenter={{lat: lat, lng: lng}}>
+      <Map google={google} zoom={4} onClick={onMapClick} initialCenter={{lat: lat, lng: lng}}>
         <Marker name={'target'} position={{lat: lat, lng: lng}}/>
       </Map>
     </div>
@@ -34,7 +36,8 @@ const Location = ({ google, selectedPlace }) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  // setRpiResponse: rpi => dispatch(setRpiResponse(rpi))
+  setLatToVideoSet: lat => dispatch(setLatToVideoSet(lat)), 
+  setLngToVideoSet: lng => dispatch(setLngToVideoSet(lng)), 
 })
 
 const mapStateToProps = state => ({

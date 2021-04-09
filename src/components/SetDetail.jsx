@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { removeFromVideoSets, setTitleToVideoSet } from "../actions";
-import BlurSelector from "./BlurSelector";
 import Location from "./Location";
+import StopValues from "./StopValues";
 
 const SetDetail = ({ displays, videosets, setTitleToVideoSet, removeFromVideoSets }) => {
   let videoset = videosets.find(videoset => videoset.selected == true)
   const [header, setHeader] = useState(videoset ? videoset.setTitle: '')
   const [videosetId, setVideosetId] = useState(videoset ? videoset.id: '')
   const [vids, setVids] = useState(videoset.videos ? videoset.videos: [])
-
-
+  
   const updateHeader = e => {
     setHeader(e.target.value);
     setTitleToVideoSet(videoset.id, e.target.value);
@@ -33,10 +32,10 @@ const SetDetail = ({ displays, videosets, setTitleToVideoSet, removeFromVideoSet
           <input type="text" value={header} className="title title-input" onChange={updateHeader}/>
           <div className="columns edition">
             <div className="column is-two-thirds">
-              <Location />
+              <Location videoset={videoset}/>
             </div>
             <div className="column is-one-third">
-              <BlurSelector />
+              <StopValues videoset={videoset} />
             </div>
           </div>
           <span 
