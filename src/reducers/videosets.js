@@ -4,6 +4,7 @@ import {
   SELECT_VIDEOSET,
   SET_TITLE_TO_VIDEOSET,
   SET_ANG_TO_VIDEOSET,
+  SET_FILE_TO_VIDEOSET,
   SET_LAT_TO_VIDEOSET,
   SET_LNG_TO_VIDEOSET,
 } from '../actions/index';
@@ -123,6 +124,19 @@ const videosets = (state = getVideoSets(), action) => {
       newState = [
         ...state.map(videoset => ({
           ...videoset, angle: videoset.selected == true ? videosetAngle : videoset.angle
+        }))
+      ]
+      saveToLocalStorage(newState)
+      return newState
+
+    case SET_FILE_TO_VIDEOSET:
+      const selVideosetf = state.filter(videoset => videoset.selected == true)[0]
+      selVideosetf.file=action.file
+      const videosetFile = selVideosetf.file;
+
+      newState = [
+        ...state.map(videoset => ({
+          ...videoset, file: videoset.selected == true ? videosetFile : videoset.file
         }))
       ]
       saveToLocalStorage(newState)

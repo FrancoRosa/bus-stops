@@ -1,15 +1,12 @@
 import { useState, useEffect } from "react";
 import ReactAudioPlayer from 'react-audio-player';
 
-const StopValues = ({videoset}) => {
+const StopValues = ({ videoset, setFileToVideoSet}) => {
   const {lat, lng, angle} = videoset
   const [path, setPath] = useState('');
   const [name, setName] = useState('');
   const [file, setFile] = useState('');
 
-  const exists = true
-  const enabled = true
-  
   const handleFiles = e => {
     let path = e.target.files[0]
     let localPath = URL.createObjectURL(path);
@@ -17,6 +14,7 @@ const StopValues = ({videoset}) => {
     setFile(e.target.files[0])
     setPath(localPath)
     setName(localName)
+    setFileToVideoSet([localPath, localName])
   }
 
   const processVideo = () => {

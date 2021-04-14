@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { removeFromVideoSets, setTitleToVideoSet } from "../actions";
+import { removeFromVideoSets, setFileToVideoSet, setTitleToVideoSet } from "../actions";
 import Location from "./Location";
 import StopValues from "./StopValues";
 
@@ -35,7 +35,7 @@ const SetDetail = ({ displays, videosets, setTitleToVideoSet, removeFromVideoSet
               <Location videoset={videoset}/>
             </div>
             <div className="column is-one-third">
-              <StopValues videoset={videoset} />
+              <StopValues videoset={videoset} setFileToVideoSet={setFileToVideoSet} />
             </div>
           </div>
           <span 
@@ -57,6 +57,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setTitleToVideoSet: (id, title) => dispatch(setTitleToVideoSet(id, title)),
+  setFileToVideoSet: file => dispatch(setFileToVideoSet(file)),
   removeFromVideoSets: id => dispatch(removeFromVideoSets(id))
 })
 
