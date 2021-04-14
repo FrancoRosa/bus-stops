@@ -6,7 +6,7 @@ import StopValues from "./StopValues";
 
 const SetDetail = ({ displays, videosets, setTitleToVideoSet, removeFromVideoSets }) => {
   let videoset = videosets.find(videoset => videoset.selected == true)
-  const [header, setHeader] = useState(videoset ? videoset.setTitle: '')
+  const [header, setHeader] = useState(videoset ? videoset.title: '')
   const [videosetId, setVideosetId] = useState(videoset ? videoset.id: '')
   const [vids, setVids] = useState(videoset.videos ? videoset.videos: [])
   
@@ -17,7 +17,7 @@ const SetDetail = ({ displays, videosets, setTitleToVideoSet, removeFromVideoSet
   
   useEffect(()=>{
     videoset = videosets.find(videoset => videoset.selected === true);
-    setHeader(videoset ? videoset.setTitle: '');
+    setHeader(videoset ? videoset.title: '');
     setVids(videoset.videos ? videoset.videos: []);
   },[videosets])
 

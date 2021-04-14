@@ -3,7 +3,7 @@ import {
   REMOVE_FROM_VIDEOSETS,
   SELECT_VIDEOSET,
   SET_TITLE_TO_VIDEOSET,
-  SET_VIDEO_TO_VIDEOSET,
+  SET_ANG_TO_VIDEOSET,
   SET_LAT_TO_VIDEOSET,
   SET_LNG_TO_VIDEOSET,
 } from '../actions/index';
@@ -17,8 +17,8 @@ const getVideoSets = () => {
       {
         id: Date.now(),
         title: 'Nuevo Paradero',
-        lat: 0,
-        lng: 0,
+        lat: -13.53027,
+        lng: -71.96679,
         angle: 0,
         file: '',
         selected: true
@@ -43,8 +43,8 @@ const videosets = (state = getVideoSets(), action) => {
         ...videosets, {
           id: Date.now(),
           title: 'Nuevo Paradero',
-          lat: 0,
-          lng: 0,
+          lat: -13.53027,
+          lng: -71.96679,
           angle: 0,
           file: '',
           selected: true
@@ -83,7 +83,7 @@ const videosets = (state = getVideoSets(), action) => {
     case SET_TITLE_TO_VIDEOSET:
       newState = [
         ...state.map(videoset => ({
-          ...videoset, setTitle: videoset.id == action.id ? action.title : videoset.setTitle
+          ...videoset, title: videoset.id == action.id ? action.title : videoset.title
         }))
       ]
       saveToLocalStorage(newState)
@@ -114,6 +114,19 @@ const videosets = (state = getVideoSets(), action) => {
       ]
       saveToLocalStorage(newState)
       return newState  
+    
+    case SET_ANG_TO_VIDEOSET:
+      const selVideoseta = state.filter(videoset => videoset.selected == true)[0]
+      selVideoseta.angle=action.angle
+      const videosetAngle = selVideoseta.angle;
+
+      newState = [
+        ...state.map(videoset => ({
+          ...videoset, angle: videoset.selected == true ? videosetAngle : videoset.angle
+        }))
+      ]
+      saveToLocalStorage(newState)
+      return newState
 
     default:
       return state;

@@ -2,15 +2,14 @@ import { connect } from "react-redux";
 import { selectVideoSet } from "../actions";
 
 const SetCard = ({ setInfo, selectVideoSet, videosets, displays }) => {
-  const { setTitle, selected, id } = setInfo;
+  const { title, selected, id } = setInfo;
   
   return(
     <a 
       className={`panel-block ${selected ? 'is-active' : ''}`}
       onClick={() => selectVideoSet(id)}
     > 
-      <p>{setTitle}</p>
-      
+      <p>{title}</p>
     </a>
   )
 }

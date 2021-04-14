@@ -1,6 +1,7 @@
 export const SELECT_VIDEOSET = 'SELECT_VIDEOSET';
 export const SET_TITLE_TO_VIDEOSET = 'SET_TITLE_TO_VIDEOSET';
 export const SET_VIDEO_TO_VIDEOSET = 'SET_VIDEO_TO_VIDEOSET';
+export const SET_ANG_TO_VIDEOSET = 'SET_ANG_TO_VIDEOSET';
 export const SET_LAT_TO_VIDEOSET = 'SET_LAT_TO_VIDEOSET';
 export const SET_LNG_TO_VIDEOSET = 'SET_LNG_TO_VIDEOSET';
 export const ADD_TO_VIDEOSETS = 'ADD_TO_VIDEOSETS';
@@ -43,6 +44,13 @@ export const setLngToVideoSet = (lng) => (
   {
     lng,
     type: SET_LNG_TO_VIDEOSET,
+  }
+);
+
+export const setAngToVideoSet = (angle) => (
+  {
+    angle,
+    type: SET_ANG_TO_VIDEOSET,
   }
 );
 
