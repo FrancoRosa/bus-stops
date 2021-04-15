@@ -4,7 +4,7 @@ import { removeFromVideoSets, setFileToVideoSet, setTitleToVideoSet } from "../a
 import Location from "./Location";
 import StopValues from "./StopValues";
 
-const SetDetail = ({ displays, videosets, setTitleToVideoSet, removeFromVideoSets }) => {
+const SetDetail = ({ displays, videosets, setTitleToVideoSet, removeFromVideoSets, setFileToVideoSet }) => {
   let videoset = videosets.find(videoset => videoset.selected == true)
   const [header, setHeader] = useState(videoset ? videoset.title: '')
   const [videosetId, setVideosetId] = useState(videoset ? videoset.id: '')

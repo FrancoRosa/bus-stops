@@ -47,7 +47,7 @@ const videosets = (state = getVideoSets(), action) => {
           lat: -13.53027,
           lng: -71.96679,
           angle: 0,
-          file: '',
+          file: ['',''],
           selected: true
         }
       ];

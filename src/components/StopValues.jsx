@@ -2,18 +2,20 @@ import { useState, useEffect } from "react";
 import ReactAudioPlayer from 'react-audio-player';
 
 const StopValues = ({ videoset, setFileToVideoSet}) => {
-  const {lat, lng, angle} = videoset
-  const [path, setPath] = useState('');
-  const [name, setName] = useState('');
-  const [file, setFile] = useState('');
+  const {lat, lng, angle, file} = videoset
+  const [path, setPath] = useState(file[0]);
+  const [name, setName] = useState(file[1]);
+  // const [newFile, setNewFile] = useState('');
 
   const handleFiles = e => {
     let path = e.target.files[0]
     let localPath = URL.createObjectURL(path);
     let localName = path.name
-    setFile(e.target.files[0])
+    // setnewFile(e.target.files[0])
     setPath(localPath)
     setName(localName)
+    console.log('localPath:', localPath)
+    console.log('localName:', localName)
     setFileToVideoSet([localPath, localName])
   }
 
@@ -25,6 +27,11 @@ const StopValues = ({ videoset, setFileToVideoSet}) => {
     const inputElement = document.querySelector(".videofile");
     inputElement.addEventListener("change", handleFiles, false);
   },[])
+
+  useEffect(()=>{
+    setPath(file[0])
+    setName(file[1])
+  },[videoset])
   
   return(
     <div>
@@ -33,7 +40,6 @@ const StopValues = ({ videoset, setFileToVideoSet}) => {
         <p>{lat}</p>
       </div>
       <div className="feature">
-        
         <p className="heading has-text-success">Longitud</p>
         <p>{lng}</p>
       </div>
@@ -48,7 +54,6 @@ const StopValues = ({ videoset, setFileToVideoSet}) => {
           autoPlay
           controls
         />
-        <div className="card-footer">
         <div className="file has-name file-selector">
           <label className="file-label">
             <input className={"file-input videofile"} type="file" name="resume"/>
@@ -62,7 +67,6 @@ const StopValues = ({ videoset, setFileToVideoSet}) => {
             </span>
           </label>
         </div>
-      </div>
       </div>
     </div>
   )
