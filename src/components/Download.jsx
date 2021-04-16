@@ -6,7 +6,7 @@ import { connect } from "react-redux"
 const Download = ({ videosets }) => {
   let result;
   
-  useEffect(()=>{
+  const generateFile = () => {
     result = videosets.map(videoset => ({
       nombre: videoset.title,
       latitud: videoset.lat,
@@ -14,14 +14,16 @@ const Download = ({ videosets }) => {
       angulo: videoset.angle,
       archivo: videoset.file[1],
     }))
+    let currentTime = new Date();
+    let currentStr = currentTime.toLocaleString('sv-SE').split(/-|:/).join('');
+    let filePrefix = currentStr.replace(' ','_') 
     let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(result));
-    let dlAnchorElem = document.querySelector('.download');
+    let dlAnchorElem = document.querySelector('.download_compact');
     dlAnchorElem.setAttribute("href",     dataStr     );
-    dlAnchorElem.setAttribute("download", "paraderos.txt");
-  },[])
+    dlAnchorElem.setAttribute("download", `${filePrefix}_compacto.txt`);
+  }
 
-
-  useEffect(()=>{
+  const generateFileNormal = () => {
     result = videosets.map(videoset => ({
       nombre: videoset.title,
       latitud: videoset.lat,
@@ -29,17 +31,35 @@ const Download = ({ videosets }) => {
       angulo: videoset.angle,
       archivo: videoset.file[1],
     }))
-  },[videosets])
+    let currentTime = new Date();
+    let currentStr = currentTime.toLocaleString('sv-SE').split(/-|:/).join('');
+    let filePrefix = currentStr.replace(' ','_') 
+    let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(result, null, 2));
+    let dlAnchorElem = document.querySelector('.download_normal');
+    dlAnchorElem.setAttribute("href",     dataStr     );
+    dlAnchorElem.setAttribute("download", `${filePrefix}_normal.txt`);
+  }
 
   return (
-    <a className="panel-block download">
+    <>
+      <a href=""></a>
+      <a className="panel-block download_compact" onClick={generateFile}>
+        <span class="icon-text">
+          <span class="icon has-text-link">
+            <i class="fas fa-download"></i>
+          </span>
+          <span>Descargar Compacto</span>
+        </span>
+      </a>
+      <a className="panel-block download_normal" onClick={generateFileNormal}>
       <span class="icon-text">
         <span class="icon has-text-link">
-          <i class="fas fa-download"></i>
+          <i class="fas fa-file-download"></i>
         </span>
-        <span>Descargar paraderos</span>
+        <span>Descargar Normal</span>
       </span>
     </a>
+  </>
 )}
 
 const mapStateToProps = state => ({
