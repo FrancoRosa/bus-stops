@@ -11,7 +11,7 @@ const Download = ({ videosets }) => {
       nombre: videoset.title,
       latitud: videoset.lat,
       longitud: videoset.lng,
-      angulo: videoset.angle>=0 ? videoset.angle : parseFloat(videoset.angle)+360,
+      angulo: videoset.angle>=0 ? videoset.angle : String(parseFloat(videoset.angle)+360),
       archivo: videoset.file[1],
     }))
     let currentTime = new Date();
@@ -28,7 +28,7 @@ const Download = ({ videosets }) => {
       nombre: videoset.title,
       latitud: videoset.lat,
       longitud: videoset.lng,
-      angulo: videoset.angle>=0 ? videoset.angle : parseFloat(videoset.angle)+360,
+      angulo: videoset.angle>=0 ? videoset.angle : String(parseFloat(videoset.angle)+360),
       archivo: videoset.file[1],
     }))
     let currentTime = new Date();

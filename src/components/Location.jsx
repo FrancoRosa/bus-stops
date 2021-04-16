@@ -20,11 +20,11 @@ const Location = ({
     let newLat = 0
     let newLng = 0
     if (angle === 0) {
-      newLat = result.lat + 0.003;
+      newLat = result.lat + 0.002;
       newLng = result.lng;
     } else {
-      newLat = result.lat + 0.003*Math.sin(angle*Math.PI/180 + Math.PI/2);
-      newLng = result.lng + 0.003*Math.cos(angle*Math.PI/180 - Math.PI/2);
+      newLat = result.lat + 0.002*Math.sin(angle*Math.PI/180 + Math.PI/2);
+      newLng = result.lng + 0.002*Math.cos(angle*Math.PI/180 - Math.PI/2);
     }
     return {lat: newLat, lng: newLng}
   }
@@ -32,7 +32,6 @@ const Location = ({
   const {lat, lng, angle} = videoset
   const [start, setStart] = useState({lat, lng})
   const [start_p, setStart_p] = useState()
-  const [newAngle, setNewAngle] = useState(angle)
   const [end, setEnd] = useState(getEndPoint(lat, lng, angle))
   const [rotating, setRotating] = useState(false)
 
@@ -44,9 +43,8 @@ const Location = ({
         setLatToVideoSet(latitude);
         setLngToVideoSet(longitude);
         setStart({lat: latitude, lng: longitude})
-        setEnd({lat: latitude, lng: longitude})
         setStart_p(new google.maps.LatLng(latitude, longitude));
-        setAngToVideoSet(0)
+        setEnd(getEndPoint(latitude, longitude, angle));
       } else {
         setRotating(false)
       }
@@ -82,7 +80,6 @@ const Location = ({
         <Marker 
           name={'target'}
           position={start}
-          onClick={() => setRotating(true)}
         />
         <Polyline
           path={[
@@ -104,6 +101,8 @@ const Location = ({
               const end_p = new google.maps.LatLng(end.lat, end.lng);
               const heading = google.maps.geometry.spherical.computeHeading(start_p, end_p);
               setAngToVideoSet(heading.toFixed(2));
+            } else {
+              setRotating(true)
             }
           }}
         />
