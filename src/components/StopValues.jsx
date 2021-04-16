@@ -44,8 +44,8 @@ const StopValues = ({ videoset, setFileToVideoSet}) => {
         <p>{lng}</p>
       </div>
       <div className="feature">
-        <p className="heading has-text-success"> Angle </p>
-        <p>{angle}</p>
+        <p className="heading has-text-success"> Ángulo </p>
+        <p>{angle>=0 ? angle : (parseFloat(angle)+360)} </p>
       </div>
       <div className="feature">
         <p className="heading has-text-success">Audio</p>
