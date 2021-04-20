@@ -10,21 +10,22 @@ const Location = ({
   setLngToVideoSet,
   setAngToVideoSet,
   videoset }) => {
+
   const floatLatLng = obj => {
     const {lat, lng} = obj 
     return ({lat: parseFloat(lat), lng: parseFloat(lng)})
   }
 
-  const getEndPoint = (lat, lng, angle) => {
+  const getEndPoint = (lat, lng, angle, scale) => {
     const result = floatLatLng({lat, lng})
     let newLat = 0
     let newLng = 0
     if (angle === 0) {
-      newLat = result.lat + 0.002;
+      newLat = result.lat + scale;
       newLng = result.lng;
     } else {
-      newLat = result.lat + 0.002*Math.sin(angle*Math.PI/180 + Math.PI/2);
-      newLng = result.lng + 0.002*Math.cos(angle*Math.PI/180 - Math.PI/2);
+      newLat = result.lat + scale*Math.sin(angle*Math.PI/180 + Math.PI/2);
+      newLng = result.lng + scale*Math.cos(angle*Math.PI/180 - Math.PI/2);
     }
     return {lat: newLat, lng: newLng}
   }
@@ -32,19 +33,28 @@ const Location = ({
   const {lat, lng, angle} = videoset
   const [start, setStart] = useState({lat, lng})
   const [start_p, setStart_p] = useState()
-  const [end, setEnd] = useState(getEndPoint(lat, lng, angle))
+  const [scale, setScale] = useState(0.001)
+  const [end, setEnd] = useState(getEndPoint(lat, lng, angle, 0.001))
   const [rotating, setRotating] = useState(false)
+
+  const [latitude, setLatitude] = useState(0)
+  const [longitude, setLongitude] = useState(0)
+
 
   const onMapClick = (mapProps, map, clickEvent) =>{
     if (clickEvent.latLng){
-      let latitude = clickEvent.latLng.lat().toFixed(5)
-      let longitude = clickEvent.latLng.lng().toFixed(5)
+      let lat = clickEvent.latLng.lat().toFixed(5)
+      let lng = clickEvent.latLng.lng().toFixed(5)
+      
+      setLatitude(lat)
+      setLongitude(lng)
+      
       if (!rotating) {
-        setLatToVideoSet(latitude);
-        setLngToVideoSet(longitude);
-        setStart({lat: latitude, lng: longitude})
-        setStart_p(new google.maps.LatLng(latitude, longitude));
-        setEnd(getEndPoint(latitude, longitude, angle));
+        setLatToVideoSet(lat);
+        setLngToVideoSet(lng);
+        setStart({lat, lng})
+        setStart_p(new google.maps.LatLng(lat, lng));
+        setEnd(getEndPoint(lat, lng, angle, scale));
       } else {
         setRotating(false)
       }
@@ -53,18 +63,34 @@ const Location = ({
 
   const onMapMouseMove = (mapProps, map, mousemoveEvent) =>{
     if (mousemoveEvent.latLng && rotating) {
-      let latitude = mousemoveEvent.latLng.lat().toFixed(5)
-      let longitude = mousemoveEvent.latLng.lng().toFixed(5)
-      setEnd({lat: latitude, lng: longitude});
+      let lat = mousemoveEvent.latLng.lat().toFixed(5)
+      let lng = mousemoveEvent.latLng.lng().toFixed(5)
+      setEnd({lat, lng});
     }
+  }
+
+  const getScale = zoom => {
+    if (zoom >= 20) return 0.00025
+    if (zoom == 19) return 0.0005
+    if (zoom == 18) return 0.001
+    if (zoom == 17) return 0.002
+    if (zoom == 16) return 0.003
+    if (zoom <= 15) return 0.004
+  }
+
+  const onMapZoomChanged = (mapProps, map, mousemoveEvent) =>{
+    let newScale = getScale(parseInt(map.zoom))
+    console.log('zoom & scale:', map.zoom, newScale)
+    setEnd(getEndPoint(latitude, longitude, angle, newScale));
+    setScale(newScale);
   }
 
   useEffect(()=>{
     const {lat, lng, angle} = videoset;
     setStart({lat, lng});
-    setEnd(getEndPoint(lat, lng, angle));
+    setEnd(getEndPoint(lat, lng, angle, scale));
     setStart_p(new google.maps.LatLng(lat, lng));
-  },[videoset])
+  },[videoset, scale])
 
   const lineSymbol = {
     path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
@@ -72,9 +98,10 @@ const Location = ({
 
   return (
     <div className="container map-container">
-      <Map google={google} zoom={16} 
+      <Map google={google} zoom={18} 
         onClick={onMapClick}
         onMousemove={onMapMouseMove}
+        onZoomChanged={onMapZoomChanged}
         initialCenter={start}
       >
         <Marker 
