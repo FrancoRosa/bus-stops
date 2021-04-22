@@ -107,6 +107,16 @@ const Location = ({
         <Marker 
           name={'target'}
           position={start}
+          onClick={()=> {
+            if(rotating){
+              setRotating(false)
+              const end_p = new google.maps.LatLng(end.lat, end.lng);
+              const heading = google.maps.geometry.spherical.computeHeading(start_p, end_p);
+              setAngToVideoSet(heading.toFixed(2));
+            } else {
+              setRotating(true)
+            }
+          }}
         />
         <Polyline
           path={[

@@ -8,11 +8,11 @@ const Download = ({ videosets }) => {
   
   const generateFile = () => {
     result = videosets.map(videoset => ({
-      nombre: videoset.title,
-      latitud: videoset.lat,
-      longitud: videoset.lng,
-      angulo: videoset.angle>=0 ? videoset.angle : String(parseFloat(videoset.angle)+360),
-      archivo: videoset.file[1],
+      nb: videoset.title,
+      la: String(videoset.lat),
+      lo: String(videoset.lng),
+      na: videoset.file[1],
+      ru: videoset.angle>=0 ? String(videoset.angle) : String(parseFloat(videoset.angle)+360),
     }))
     let currentTime = new Date();
     let currentStr = currentTime.toLocaleString('sv-SE').split(/-|:/).join('');
@@ -25,11 +25,11 @@ const Download = ({ videosets }) => {
 
   const generateFileNormal = () => {
     result = videosets.map(videoset => ({
-      nombre: videoset.title,
-      latitud: videoset.lat,
-      longitud: videoset.lng,
-      angulo: videoset.angle>=0 ? videoset.angle : String(parseFloat(videoset.angle)+360),
-      archivo: videoset.file[1],
+      nb: videoset.title,
+      la: String(videoset.lat),
+      lo: String(videoset.lng),
+      na: videoset.angle>=0 ? String(videoset.angle) : String(parseFloat(videoset.angle)+360),
+      ru: videoset.file[1],
     }))
     let currentTime = new Date();
     let currentStr = currentTime.toLocaleString('sv-SE').split(/-|:/).join('');
