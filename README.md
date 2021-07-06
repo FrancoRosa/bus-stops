@@ -2,6 +2,14 @@
 
 > Web tool to easily create JS files containing desired points and other features
 
+- [Bus stop](#bus-stop)
+  - [Live demo](#live-demo)
+  - [Sample output file](#sample-output-file)
+  - [How to use it](#how-to-use-it)
+  - [Author](#author)
+  - [Show your support](#show-your-support)
+  - [📝 License](#-license)
+
 ## Live demo
 
 <p align="center">
