@@ -5,7 +5,7 @@
 ## Live demo
 
 <p align="center">
-  <a href="https://raspberry-kiosk.netlify.app">
+  <a href="https://anunciador-bus.web.app/">
     <img src="demo.gif">
   </a>
 </p> 
