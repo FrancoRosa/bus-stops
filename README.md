@@ -1,6 +1,6 @@
 # Bus stop 
 
-> Web tool to easily create JS files containing desired points and other features
+> Web tool to easily create JSON files containing desired points and other features
 
 - [Bus stop](#bus-stop)
   - [Live demo](#live-demo)
