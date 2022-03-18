@@ -22,7 +22,7 @@ body::-webkit-scrollbar {
   justify-content: space-between;
 }
 
-.panel-block > .controls > *{
+.panel-block > .controls > * {
   margin: 0 0.5em;
 }
 
@@ -58,7 +58,7 @@ body::-webkit-scrollbar {
   justify-content: center;
 }
 
-.blurselector > .field{
+.blurselector > .field {
   display: flex;
   width: 40%;
   justify-content: space-around;
@@ -77,80 +77,84 @@ body::-webkit-scrollbar {
   max-width: 80%;
 }
 
-.delete-set{
+.delete-set {
   position: absolute;
   right: 1em;
   padding: 2em;
   cursor: pointer;
 }
 
-.card-footer{
+.card-footer {
   flex-direction: column;
 }
 
-.file-selector{
+.file-selector {
   width: 100%;
 }
 
 input[type="range"] {
   -webkit-appearance: none;
- }
- 
- input[type="range"]:focus {
-  outline: none;
- }
+}
 
- input[type="range"]::-webkit-slider-runnable-track {
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
   height: 5px;
   border: solid 1px #107964;
   background: #0a5546;
- }
+}
 
-  input[type="range"]::-webkit-slider-thumb {
+input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 15px;
   width: 15px;
   background: #22dab5;
   margin-top: -5px;
   border-radius: 50%;
- }
- 
- .file-name {
-   width: 100%;
-   display: block;
- }
+}
 
- .file-label{
+.file-name {
   width: 100%;
- }
+  display: block;
+}
 
- .map-container {
-   height: 60vh;
-   padding: 0 0 0 0;
-   margin: 0 0 0 0;
-   display: block;
- }
+.file-label {
+  width: 100%;
+}
 
- .column > .columns {
-   height: 100vh;
- }
+.map-container {
+  height: 60vh;
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+  display: block;
+}
 
- .edition {
-   height: 70vh;
- }
+.column > .columns {
+  height: 100vh;
+}
 
- .feature {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   border: solid 1px darkgreen;
-   margin-bottom: 1em;
-   padding: 1em;
-   border-radius: 10px;
- }
+.edition {
+  height: 70vh;
+}
 
- .feature > audio {
-   border-style: none;
-   margin: 1em 0.5em;
- }
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: solid 1px darkgreen;
+  margin-bottom: 1em;
+  padding: 1em;
+  border-radius: 10px;
+}
+
+.feature > audio {
+  border-style: none;
+  margin: 1em 0.5em;
+}
+
+.mr-1 {
+  margin-right: 0.5em;
+}
